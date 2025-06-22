@@ -1,7 +1,7 @@
-import 'swiper/css';
-import './Slider.scss'
-import SliderNavigation from "./components/SliderNavigation";
-import classNames from "classnames";
+import "swiper/css"
+import "./Slider.scss"
+import SliderNavigation from "./components/SliderNavigation"
+import classNames from "classnames"
 
 const defaultSliderParams = {
   slidesPerView: 5,
@@ -30,8 +30,8 @@ const defaultSliderParams = {
     1441: {
       spaceBetween: 30,
       allowTouchMove: false,
-    }
-  }
+    },
+  },
 }
 
 const Slider = (props) => {
@@ -44,24 +44,23 @@ const Slider = (props) => {
     /**
      * (default) | 'abs-bottom'
      */
-    navigationPosition = '',
+    navigationPosition = "",
+    navigationMode,
     isNavigationHiddenMobile = true,
-  } = props;
+    navigationJustifyContent,
+  } = props
 
   return (
     <div
-      className={classNames('slider', {
-        'slider--beyond-the-viewport-on-mobile-s': isBeyondTheViewportOnMobileS,
+      className={classNames("slider", {
+        "slider--beyond-the-viewport-on-mobile-s": isBeyondTheViewportOnMobileS,
       })}
       data-js-slider={JSON.stringify({
         sliderParams,
         navigationTargetElementId,
       })}
     >
-      <div
-        className="slider__swiper swiper"
-        data-js-slider-swiper=""
-      >
+      <div className="slider__swiper swiper" data-js-slider-swiper="">
         <ul className="slider__list swiper-wrapper">
           {children.map((slide, index) => (
             <li className="slider__item swiper-slide" key={index}>
@@ -74,8 +73,10 @@ const Slider = (props) => {
       {!navigationTargetElementId && (
         <SliderNavigation
           className="slider__navigation"
+          mode={navigationMode}
           position={navigationPosition}
           isHiddenMobile={isNavigationHiddenMobile}
+          justifyContent={navigationJustifyContent}
         />
       )}
 

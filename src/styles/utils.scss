@@ -9,25 +9,25 @@
   @include visually-hidden;
 }
 
-.visible-tablet{
+.visible-tablet {
   @include tablet-above {
     display: none !important;
   }
 }
 
-.hidden-tablet{
+.hidden-tablet {
   @include tablet {
     display: none !important;
   }
 }
 
-.visible-mobile{
+.visible-mobile {
   @include mobile-above {
     display: none !important;
   }
 }
 
-.hidden-mobile{
+.hidden-mobile {
   @include mobile {
     display: none !important;
   }

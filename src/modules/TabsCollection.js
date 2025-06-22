@@ -1,24 +1,24 @@
-import getParams from "@/utils/getParams";
-import pxToRem from "@/utils/pxToRem";
-import BaseComponent from "@/modules/generic/BaseComponent";
+import getParams from "@/utils/getParams"
+import pxToRem from "@/utils/pxToRem"
+import BaseComponent from "@/modules/generic/BaseComponent"
 
-const rootSelector = '[data-js-tabs]'
+const rootSelector = "[data-js-tabs]"
 
 class Tabs extends BaseComponent {
   selectors = {
     root: rootSelector,
-    navigation: '[data-js-tabs-navigation]',
-    button: '[data-js-tabs-button]',
-    content: '[data-js-tabs-content]',
+    navigation: "[data-js-tabs-navigation]",
+    button: "[data-js-tabs-button]",
+    content: "[data-js-tabs-content]",
   }
 
   stateClasses = {
-    isActive: 'is-active',
+    isActive: "is-active",
   }
 
   stateCSSVariables = {
-    activeButtonWidth: '--tabsNavigationActiveButtonWidth',
-    activeButtonOffsetLeft: '--tabsNavigationActiveButtonOffsetLeft',
+    activeButtonWidth: "--tabsNavigationActiveButtonWidth",
+    activeButtonOffsetLeft: "--tabsNavigationActiveButtonOffsetLeft",
   }
 
   constructor(rootElement) {
@@ -28,10 +28,16 @@ class Tabs extends BaseComponent {
     this.navigationElement = this.params.navigationTargetElementId
       ? document.getElementById(this.params.navigationTargetElementId)
       : this.rootElement.querySelector(this.selectors.navigation)
-    this.buttonElements = [...this.navigationElement.querySelectorAll(this.selectors.button)]
-    this.contentElements = [...this.rootElement.querySelectorAll(this.selectors.content)]
+    this.buttonElements = [
+      ...this.navigationElement.querySelectorAll(this.selectors.button),
+    ]
+    this.contentElements = [
+      ...this.rootElement.querySelectorAll(this.selectors.content),
+    ]
     this.state = this.getProxyState({
-      activeTabIndex: this.buttonElements.findIndex(({ ariaSelected }) => ariaSelected)
+      activeTabIndex: this.buttonElements.findIndex(
+        ({ ariaSelected }) => ariaSelected
+      ),
     })
     this.limitTabsIndex = this.buttonElements.length - 1
     this.bindEvents()
@@ -64,7 +70,8 @@ class Tabs extends BaseComponent {
     activeButtonElement = this.buttonElements[this.state.activeTabIndex]
   ) {
     const { width, left } = activeButtonElement.getBoundingClientRect()
-    const offsetLeft = left - this.navigationElement.getBoundingClientRect().left
+    const offsetLeft =
+      left - this.navigationElement.getBoundingClientRect().left
 
     this.navigationElement.style.setProperty(
       this.stateCSSVariables.activeButtonWidth,
@@ -83,17 +90,19 @@ class Tabs extends BaseComponent {
   }
 
   previousTab = () => {
-    const newTabIndex = this.state.activeTabIndex === 0
-      ? this.limitTabsIndex
-      : this.state.activeTabIndex - 1
+    const newTabIndex =
+      this.state.activeTabIndex === 0
+        ? this.limitTabsIndex
+        : this.state.activeTabIndex - 1
 
     this.activateTab(newTabIndex)
   }
 
   nextTab = () => {
-    const newTabIndex = this.state.activeTabIndex === this.limitTabsIndex
-      ? 0
-      : this.state.activeTabIndex + 1
+    const newTabIndex =
+      this.state.activeTabIndex === this.limitTabsIndex
+        ? 0
+        : this.state.activeTabIndex + 1
 
     this.activateTab(newTabIndex)
   }
@@ -112,10 +121,12 @@ class Tabs extends BaseComponent {
 
   onKeyDown = (event) => {
     const { target, code, metaKey } = event
-    const isTabsContentFocused = this.contentElements
-      .some((contentElement) => contentElement === target)
-    const isTabsButtonFocused = this.buttonElements
-      .some((buttonElement) => buttonElement === target)
+    const isTabsContentFocused = this.contentElements.some(
+      (contentElement) => contentElement === target
+    )
+    const isTabsButtonFocused = this.buttonElements.some(
+      (buttonElement) => buttonElement === target
+    )
 
     if (!isTabsContentFocused && !isTabsButtonFocused) {
       return
@@ -128,21 +139,21 @@ class Tabs extends BaseComponent {
       End: this.lastTab,
     }[code]
 
-    const isMacHomeKey = metaKey && code === 'ArrowLeft'
-    if(isMacHomeKey) {
+    const isMacHomeKey = metaKey && code === "ArrowLeft"
+    if (isMacHomeKey) {
       event.preventDefault()
       this.firstTab()
-      return;
+      return
     }
 
-    const isMacEndKey = metaKey && code === 'ArrowRight'
-    if(isMacEndKey) {
+    const isMacEndKey = metaKey && code === "ArrowRight"
+    if (isMacEndKey) {
       event.preventDefault()
       this.lastTab()
-      return;
+      return
     }
 
-    if(action) {
+    if (action) {
       event.preventDefault()
       action()
     }
@@ -150,9 +161,9 @@ class Tabs extends BaseComponent {
 
   bindEvents() {
     this.buttonElements.forEach((buttonElement, index) => {
-      buttonElement.addEventListener('click', () => this.onButtonClick(index))
+      buttonElement.addEventListener("click", () => this.onButtonClick(index))
     })
-    document.addEventListener('keydown', this.onKeyDown)
+    document.addEventListener("keydown", this.onKeyDown)
   }
 
   onResize = () => {

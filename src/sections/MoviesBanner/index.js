@@ -1,3 +1,3 @@
-import MoviesBanner from './MoviesBanner'
+import MoviesBanner from "./MoviesBanner"
 
 export default MoviesBanner

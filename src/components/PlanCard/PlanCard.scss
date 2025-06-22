@@ -12,14 +12,14 @@
     border-radius: var(--border-radius-m);
   }
 
-  &__info{
+  &__info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     row-gap: fluid(16, 10);
   }
 
-  &__conditions{
+  &__conditions {
     display: flex;
     align-items: end;
     column-gap: fluid-to-laptop(4, 2);
@@ -33,7 +33,7 @@
     color: var(--color-white);
   }
 
-  &__actions{
+  &__actions {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: fluid-to-laptop(20, 12);

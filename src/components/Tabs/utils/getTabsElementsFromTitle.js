@@ -1,4 +1,4 @@
-import getIdFromTitle from "@/utils/getIdFromTitle";
+import getIdFromTitle from "@/utils/getIdFromTitle"
 
 const getTabsElementsFromTitle = (title) => {
   const titleFormatted = getIdFromTitle(title)

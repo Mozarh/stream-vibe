@@ -12,7 +12,7 @@
   &--3 {
     --grid-columns: 3;
 
-    @include tablet{
+    @include tablet {
       --grid-columns: 2;
 
       .grid__item:nth-child(odd):last-child {
@@ -20,7 +20,7 @@
       }
     }
 
-    @include mobile{
+    @include mobile {
       --grid-columns: 1;
     }
   }

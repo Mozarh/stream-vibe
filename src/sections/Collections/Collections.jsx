@@ -1,17 +1,14 @@
-import './Collections.scss'
+import "./Collections.scss"
 import Tabs from "@/components/Tabs"
 import collectionGroups from "./collectionGroups"
-import getIdFromTitle from "@/utils/getIdFromTitle";
-import Section from "@/layouts/Section";
-import SliderNavigation from "@/components/Slider/components/SliderNavigation";
-import Slider from "@/components/Slider";
-import CategoryCard from "@/components/CategoryCard";
+import getIdFromTitle from "@/utils/getIdFromTitle"
+import Section from "@/layouts/Section"
+import SliderNavigation from "@/components/Slider/components/SliderNavigation"
+import Slider from "@/components/Slider"
+import CategoryCard from "@/components/CategoryCard"
+import MovieCard from "@/components/MovieCard"
 
-const Collections = (props) => {
-  const {
-    className,
-  } = props
-
+const Collections = () => {
   return (
     <Tabs
       className="collections container"
@@ -26,13 +23,12 @@ const Collections = (props) => {
               {collectionGroup.title}
             </p>
             {collectionGroup.items.map((collectionItem, index) => {
-              const {
-                title,
-                categoryItems,
-                sliderParams,
-              } = collectionItem
+              const { title, categoryItems, movieItems, sliderParams } =
+                collectionItem
 
-              const titleFormatted = `${getIdFromTitle(collectionGroup.title)}-${getIdFromTitle(title)}`
+              const titleFormatted = `${getIdFromTitle(
+                collectionGroup.title
+              )}-${getIdFromTitle(title)}`
               const titleId = `${titleFormatted}-title`
               const sliderNavigationId = `${titleFormatted}-slider-navigation`
 
@@ -41,12 +37,9 @@ const Collections = (props) => {
                   className="collections__section"
                   title={title}
                   titleId={titleId}
-                  actions={(
-                    <SliderNavigation
-                      id={sliderNavigationId}
-                      mode="tile"
-                    />
-                  )}
+                  actions={
+                    <SliderNavigation id={sliderNavigationId} mode="tile" />
+                  }
                   isActionsHiddenOnMobile
                   key={index}
                 >
@@ -55,19 +48,19 @@ const Collections = (props) => {
                     navigationTargetElementId={sliderNavigationId}
                     isBeyondTheViewportOnMobileS
                   >
-                    {categoryItems.map((categoryItem, index) => (
-                      <CategoryCard
-                        {...categoryItem}
-                        key={index}
-                      />
-                    ))}
+                    {categoryItems?.map((categoryItem, index) => (
+                      <CategoryCard {...categoryItem} key={index} />
+                    )) ??
+                      movieItems?.map((movieItem, index) => (
+                        <MovieCard {...movieItem} key={index} />
+                      ))}
                   </Slider>
                 </Section>
               )
             })}
           </div>
-        )
-        }))}
+        ),
+      }))}
     />
   )
 }

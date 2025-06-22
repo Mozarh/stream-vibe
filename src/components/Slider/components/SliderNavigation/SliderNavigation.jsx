@@ -1,41 +1,44 @@
-import './SliderNavigation.scss'
-import classNames from "classnames";
-import Button from "@/components/Button";
+import "./SliderNavigation.scss"
+import classNames from "classnames"
+import Button from "@/components/Button"
 
-const SliderNavigation = ( props ) => {
+const SliderNavigation = (props) => {
   const {
     className,
     id,
     hasPagination = true,
     /**
-     * '' (default) | 'tile'
+     * '' (default) | 'tile' | 'rounded'
      */
-    mode = '',
+    mode = "",
     /**
      * (default) | 'abs-bottom'
      */
-    position = '',
+    position = "",
     isHiddenMobile,
-  } = props;
+    buttonMode = "black-10",
+    justifyContent,
+  } = props
 
   return (
     <div
       className={classNames(className, "slider-navigation", {
         [`slider-navigation--${mode}`]: mode,
+        [`slider-navigation--${justifyContent}`]: justifyContent,
         [`slider-navigation--${position}`]: position,
-        'hidden-mobile': isHiddenMobile,
+        "hidden-mobile": isHiddenMobile,
       })}
       id={id}
       data-js-slider-navigation=""
     >
       <Button
-        className = "slider-navigation__arrow-button slider-navigation__arrow-button--previous"
-        mode='black-10'
-        iconName='arrow-left'
+        className="slider-navigation__arrow-button slider-navigation__arrow-button--previous"
+        mode={buttonMode}
+        iconName="arrow-left"
         label="Previous slide"
         isLabelHidden
         extraAttrs={{
-          'data-js-slider-previous-button': '',
+          "data-js-slider-previous-button": "",
         }}
       />
       {hasPagination && (
@@ -45,13 +48,13 @@ const SliderNavigation = ( props ) => {
         />
       )}
       <Button
-        className = "slider-navigation__arrow-button slider-navigation__arrow-button--next"
-        mode='black-10'
-        iconName='arrow-right'
+        className="slider-navigation__arrow-button slider-navigation__arrow-button--next"
+        mode={buttonMode}
+        iconName="arrow-right"
         label="Next slide"
         isLabelHidden
         extraAttrs={{
-          'data-js-slider-next-button': '',
+          "data-js-slider-next-button": "",
         }}
       />
     </div>

@@ -4,9 +4,12 @@
   padding: fluid(50, 24);
   border: var(--border);
   border-radius: var(--border-radius-l);
-  background:
-          linear-gradient(222deg, rgba(229, 0, 0, 0.50) -208.03%, rgba(229, 0, 0, 0.00) 41.32%),
-          var(--color-black-06);
+  background: linear-gradient(
+      222deg,
+      rgba(229, 0, 0, 0.5) -208.03%,
+      rgba(229, 0, 0, 0) 41.32%
+    ),
+    var(--color-black-06);
 
   @include laptop {
     border-radius: var(--border-radius-m);
@@ -38,6 +41,5 @@
   &__image {
     width: 55%;
     object-fit: contain;
-
   }
 }
